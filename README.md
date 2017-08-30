@@ -1,5 +1,5 @@
 # AMCtoOwncloud
-*AMCtoOwncloud* is a *Nautilus script* that sends *auto multiple choice* (*AMC*) annotated sheets to *Owncloud/Nextcloud* and share them with students.
+*AMCtoOwncloud* is a *Nautilus script* that sends *[Auto Multiple Choice](http://auto-multiple-choice.net/)* (*AMC*) annotated sheets to *Owncloud/Nextcloud* and share them with students.
 
 Each quiz file is uploaded to a remote folder unique to the corresponding student:
 
