@@ -8,7 +8,7 @@ Each quiz file is uploaded to a remote folder unique to the corresponding studen
 Then the folder is shared (if not already) with the student who can be a local user or a remote user on another federated server.
 
 ## Installation
-Copy `AMCtoOwncloud.sh` and `.AMCtoOwncloud.py` in the Nautilus scripts folder: `~.local/share/nautilus/scripts/`
+Copy `AMCtoOwncloud.sh` and `.AMCtoOwncloud.py` in the Nautilus scripts folder: `~/.local/share/nautilus/scripts/`
 
 <img src="/docs/InstallingScript.png" width="600x">
 
