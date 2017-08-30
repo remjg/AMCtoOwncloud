@@ -13,7 +13,7 @@ Copy `AMCtoOwncloud.sh` and `.AMCtoOwncloud.py` in the Nautilus scripts folder: 
 <img src="/docs/InstallingScript.png" width="600x">
 
 In order to make it work, you need to install the following Python modules:
-`os`, `csv`, `re`, `owncloud`, `getpass`, `requests`, `lxml.html`
+`os`, `csv`, `re`, `getpass`, `requests`, `lxml.html`, `owncloud` (see [pyocclient](https://github.com/owncloud/pyocclient))
 
 You also need `gnome-terminal` or you need to change the `AMCtoOwncloud.sh` script file.
 
