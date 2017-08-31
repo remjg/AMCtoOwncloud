@@ -1,7 +1,7 @@
 # AMCtoOwncloud
-*AMCtoOwncloud* is a *Nautilus script* that sends *[Auto Multiple Choice](http://auto-multiple-choice.net/)* (*AMC*) annotated sheets to *Owncloud/Nextcloud* and share them with students.
+*AMCtoOwncloud* is a *Nautilus script* that sends *[Auto Multiple Choice](http://auto-multiple-choice.net/)* (*AMC*) annotated papers to *Owncloud/Nextcloud* and share them with the corresponding students.
 
-Each quiz file is uploaded to a remote folder unique to the corresponding student:
+Each quiz file is uploaded to a remote folder unique to each student:
 
     /OWNCLOUD_FOLDER/Group/Surname - Name (Number) - Interros Maths/
     
@@ -15,7 +15,7 @@ Copy `AMCtoOwncloud.sh` and `.AMCtoOwncloud.py` in the Nautilus scripts folder: 
 In order to make it work, you need to install the following Python modules:
 `os`, `csv`, `re`, `getpass`, `requests`, `lxml.html`, `owncloud` (see [pyocclient](https://github.com/owncloud/pyocclient))
 
-You also need `gnome-terminal` or you need to change the `AMCtoOwncloud.sh` script file.
+You also need `gnome-terminal` or you will have to edit the `AMCtoOwncloud.sh` script file to use another terminal.
 
 ## Configuration
 
@@ -32,16 +32,18 @@ The CSV file containg all your student information must use colons `:` as separa
     4emeA:MOUSE:Mickey:401:mmouse@domain.com:mmouse
     3emeB:DUCK:Donald:304:dduck@domain.com:dduck@AnotherOwncloudServer.com/owncloud
     
-Finally, **annotated sheets must contain the student number** in their name
-(the first number of the file name is extracted to associate each quiz to the corresponding student). Don't forget to configure auto-multiple-choice!
+Finally, **annotated papers must contain the student number** in their name
+(the first number of the file name is extracted to associate each quiz to the corresponding student). Don't forget to configure auto-multiple-choice using the column headers of your `.csv` file:
+
+<img src="/docs/RenamingAnnotatedPapers.png" width="600x">
     
 ## Use
-*Right click* on the annotated sheets (or on folders) and go to the submenu *scripts*:
+*Right click* on the annotated papers (or on folders) and go to the submenu *scripts*:
 
 <img src="/docs/UsingScript.png" width="600x">
 
 ## Special use case
-If your Owncloud server is behind a Central Authentication Service (CAS), you might want to use `connect_owncloud_behind_sso()` instead of `connect_owncloud()`.
+If your *Owncloud* server is behind a *Central Authentication Service (CAS)*, you might want to use `connect_owncloud_behind_sso()` instead of `connect_owncloud()`.
 If that is the case, you just have to comment/uncomment the following lines as follow:
 
     #owncloud_client = connect_owncloud(OWNCLOUD_ADDRESS, OWNCLOUD_USERNAME)
