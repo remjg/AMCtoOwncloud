@@ -104,26 +104,35 @@ def get_files_paths_from_nautilus():
     return list_of_files
 
 
-def get_students_from_csv(csv_file_path, verbose=False):
+def get_students_from_csv(  csv_file_path, csv_delimiter=':', csv_comment='#', 
+                            name_header="name",
+                            surname_header="surname",
+                            group_header="group",
+                            number_header = "number",
+                            email_header="email",
+                            owncloud_header="owncloud",
+                            verbose=False):
     """Extract student information from a CSV file.
     
     Returns a dictionary of all students (key = number, value = student object)
     """
     dict_of_students = {}
     with open(csv_file_path, newline='') as csv_file:
-        tableau = csv.DictReader(csv_file, delimiter=':')
-        for row in tableau: 
-            student = Student(  name = row["name"], 
-                                surname = row["surname"],
-                                group = row["group"],
-                                number = row["number"],
-                                email = row["email"],
-                                owncloud = row["owncloud"])
+        tab = csv.DictReader((row for row in csv_file
+                              if not row.startswith(csv_comment)),
+                             delimiter=csv_delimiter)
+        for row in tab: 
+            student = Student(  name = row[name_header], 
+                                surname = row[surname_header],
+                                group = row[group_header],
+                                number = row[number_header],
+                                email = row[email_header],
+                                owncloud = row[owncloud_header])
             dict_of_students[student.number] = student
     
-    print( '\nFound {} students in {}.'.format(len(dict_of_students),
-                                           csv_file_path
-                                          ))
+    print('\nFound {} students in {}.'.format( len(dict_of_students),
+                                                csv_file_path
+                                              ))
     if verbose:
         for student in dict_of_students.values():
             student.print()
