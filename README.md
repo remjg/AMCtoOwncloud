@@ -35,14 +35,14 @@ The CSV file containg all your student information must use colons `:` as separa
 Finally, **annotated papers must contain the student number** in their name
 (the first number of the file name is extracted to associate each quiz to the corresponding student). Don't forget to configure auto-multiple-choice using the column headers of your `.csv` file:
 
-<img src="/docs/RenamingAnnotatedPapers.png" width="600x">
+<img src="/docs/RenamingAnnotatedPapers.png" width="400x">
     
 ## Use
 *Right click* on the annotated papers (or on folders) and go to the submenu *scripts*:
 
 <img src="/docs/UsingScript1-Menu.png" width="600x">
 
-Then enter your *Owncloud*password, the name of the quiz, and wait:
+Then enter your *Owncloud* password, the name of the quiz, and wait:
 
 <img src="/docs/UsingScript2-Output.png" width="600x">
 
