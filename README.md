@@ -40,7 +40,13 @@ Finally, **annotated papers must contain the student number** in their name
 ## Use
 *Right click* on the annotated papers (or on folders) and go to the submenu *scripts*:
 
-<img src="/docs/UsingScript.png" width="600x">
+<img src="/docs/UsingScript1-Menu.png" width="600x">
+
+Then enter your *Owncloud*password, the name of the quiz, and wait:
+
+<img src="/docs/UsingScript2-Output.png" width="600x">
+
+Every encountered issue should be displayed (unmatched files, login error, uploading or sharing errors).
 
 ## Special use case
 If your *Owncloud* server is behind a *Central Authentication Service (CAS)*, you might want to use `connect_owncloud_behind_sso()` instead of `connect_owncloud()`.
