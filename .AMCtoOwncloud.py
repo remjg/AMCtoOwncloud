@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 #
-# Nautilus script that sends AMC annotated sheets to Owncloud
+# Nautilus script that sends AMC annotated papers to Owncloud
 # Copyright (C) 2017 Rémi GROLLEAU
 #
 # This program is free software: you can redistribute it and/or modify
@@ -334,6 +334,7 @@ def upload_and_share_quiz(owncloud_client, list_of_students, folder_base,
             except:
                 print(  "ERROR: Can't share folder " + remote_folder 
                         + " with " + student.owncloud)
+
 
 ### Script
 
