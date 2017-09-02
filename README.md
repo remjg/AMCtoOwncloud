@@ -42,7 +42,7 @@ The CSV file containg all your student information must use colons `:` as separa
     4emeE:DUCK:Donald:4999:prenaud@aFederatedServer.com:donaldduck@domain.com
     
 Finally, **annotated papers must contain the student number** in their name
-(the first number of the file name is extracted to associate each quiz to the corresponding student). Don't forget to configure auto-multiple-choice using the column headers of your `.csv` file:
+(the first number of the file name is extracted to associate each quiz to the corresponding student). Don't forget to configure *auto-multiple-choice* using the column headers of your `.csv` file:
 
 <img src="/docs/RenamingAnnotatedPapers.png" width="400x">
     
