@@ -26,11 +26,12 @@ Edit the `.AMCtoOwncloud.py` and change parameters at the beginning:
     OWNCLOUD_ADDRESS = 'http://MyOwnCloudProvider.com/'
     OWNCLOUD_USERNAME = 'MyUserName'
     
-The CSV file containg all your student information must use colons `:` as separators and the following headers (of course you can edit the script to change this behaviour):
+The CSV file containg all your student information must use colons `:` as separators and the following headers (there are optional parameters in function `get_students_from_csv()` to change this behaviour):
 
-    group:surname:name:number:email:owncloud
-    4emeA:MOUSE:Mickey:401:mmouse@domain.com:mmouse
-    3emeB:DUCK:Donald:304:dduck@domain.com:dduck@AnotherOwncloudServer.com/owncloud
+    group:surname:name:number:owncloud:email
+    3emeE:MOUSE:Mickey:3998:cabitzmil:mickeymouse@domain.com
+    3emeE:MOUSE:Minnie:3999:agrevet:minniemouse@domain.com
+    4emeE:DUCK:Donald:4999:prenaud@aFederatedServer.com:donaldduck@domain.com
     
 Finally, **annotated papers must contain the student number** in their name
 (the first number of the file name is extracted to associate each quiz to the corresponding student). Don't forget to configure auto-multiple-choice using the column headers of your `.csv` file:
