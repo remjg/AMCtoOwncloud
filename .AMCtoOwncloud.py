@@ -30,8 +30,7 @@ import lxml.html # for owncloud behind SSO only
 
 
 CSV_FILE_PATH = '/home/username/students.csv'
-OWNCLOUD_FOLDER = 'Interro Maths/'
-
+OWNCLOUD_FOLDER = 'QuizzesFolder/'
 OWNCLOUD_ADDRESS = 'http://ncloud.zaclys.com/'
 OWNCLOUD_USERNAME = 'MyUserName'
 
