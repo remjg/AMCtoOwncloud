@@ -259,14 +259,20 @@ def upload_and_share_quiz(owncloud_client, list_of_students, folder_base,
     
     Share folders with the corresponding students (if not already done).   
     """
-    # Create remote folders if necessary 
+    if quiz_name == None:
+        quiz_name = input('Enter quiz name: ')
+    students_total = len(list_of_students)
+    students_current = 0
     print('\nUploading files...')
+    
+    # Create remote folders if necessary 
     try:
         owncloud_client.mkdir(folder_base)
         print('Created folder ' + folder_base)
     except:
         pass
-    for student in list_of_students: 
+    for student in list_of_students:
+        students_current += 1
         folder_group = student.group + '/'
         folder_student = ( student.surname 
                         + ' '  + student.name 
@@ -275,18 +281,21 @@ def upload_and_share_quiz(owncloud_client, list_of_students, folder_base,
         remote_folder = folder_base + folder_group + folder_student
         try:
             owncloud_client.mkdir(folder_base + folder_group)
-            print('Created folder ' + folder_base + folder_group)
+            print(  ('{}/{} Created folder ' 
+                    + folder_base 
+                    + folder_group
+                    ).format(students_current,students_total) )
         except:
             pass
         try:
             owncloud_client.mkdir(remote_folder)  
-            print('Created folder ' + remote_folder)
+            print(  ('{}/{} Created folder ' 
+                    + remote_folder
+                    ).format(students_current,students_total) )
         except:
             pass
         
         # Define remote quiz name et send
-        if quiz_name == None:
-            quiz_name = input('Enter quiz name: ')
         remote_quiz_name = ( quiz_name + ' - '
                             + student.surname 
                             + ' '  + student.name 
@@ -296,9 +305,11 @@ def upload_and_share_quiz(owncloud_client, list_of_students, folder_base,
                             + remote_quiz_name)
         try:
             owncloud_client.put_file(remote_quiz_path, student.quiz)
-            print('Sent file ' + remote_quiz_path)
+            print(  ('{}/{} Sent file ' 
+                    + remote_quiz_path
+                    ).format(students_current,students_total) )
         except:
-            print("Can't send file " + remote_quiz_path)
+            print("ERROR: Can't send file " + remote_quiz_path)
             
         # Share folders if necessary
         is_shared = False
@@ -315,9 +326,13 @@ def upload_and_share_quiz(owncloud_client, list_of_students, folder_base,
                 else: # local user
                     owncloud_client.share_file_with_user(   remote_folder, 
                                                             student.owncloud)
-                print( remote_folder + " shared with " + student.owncloud )
+                print(  ( "{}/{} "
+                        + remote_folder 
+                        + " shared with " 
+                        + student.owncloud
+                        ).format(students_current,students_total) )
             except:
-                print(  "Can't share folder " + remote_folder 
+                print(  "ERROR: Can't share folder " + remote_folder 
                         + " with " + student.owncloud)
 
 ### Script
