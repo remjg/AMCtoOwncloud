@@ -330,9 +330,10 @@ def upload_and_share_quiz(owncloud_client, list_of_students, folder_base,
                         + " shared with " 
                         + student.owncloud
                         ).format(students_current, students_total) )
-            except:
-                print(  "ERROR: Can't share folder " + remote_folder 
-                        + " with " + student.owncloud)
+            except Exception as e:
+                print(  ("ERROR: Can't share folder " + remote_folder 
+                        + " with " + student.owncloud
+                        + "\n{}").format(e) )
 
 
 ### Script
