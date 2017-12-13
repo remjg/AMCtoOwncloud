@@ -217,13 +217,13 @@ def connect_owncloud_behind_sso(owncloud_address, username, password=None):
     # Fill out the form with username and password
     if password == None:
         password = getpass.getpass('\nEnter Owncloud password: ')
-        form['username'] = username
-        form['password'] = password
-        response = s.post(sso_address, data=form)
-        print(response.url) # to check if it worked
-        print('\nConnecting to Owncloud... ', end="")
-        oc = owncloud.Client(owncloud_address)
-        oc._session = s
+    form['username'] = username
+    form['password'] = password
+    response = s.post(sso_address, data=form)
+    # print(response.url) # to check if it worked
+    print('\nConnecting to Owncloud... ', end="")
+    oc = owncloud.Client(owncloud_address)
+    oc._session = s
         
     # Connect
     try:        
@@ -283,14 +283,14 @@ def upload_and_share_quiz(owncloud_client, list_of_students, folder_base,
             print(  ('{}/{} Created folder ' 
                     + folder_base 
                     + folder_group
-                    ).format(students_current,students_total) )
+                    ).format(students_current, students_total) )
         except:
             pass
         try:
             owncloud_client.mkdir(remote_folder)  
             print(  ('{}/{} Created folder ' 
                     + remote_folder
-                    ).format(students_current,students_total) )
+                    ).format(students_current, students_total) )
         except:
             pass
         
@@ -306,7 +306,7 @@ def upload_and_share_quiz(owncloud_client, list_of_students, folder_base,
             owncloud_client.put_file(remote_quiz_path, student.quiz)
             print(  ('{}/{} Sent file ' 
                     + remote_quiz_path
-                    ).format(students_current,students_total) )
+                    ).format(students_current, students_total) )
         except:
             print("ERROR: Can't send file " + remote_quiz_path)
             
@@ -329,7 +329,7 @@ def upload_and_share_quiz(owncloud_client, list_of_students, folder_base,
                         + remote_folder 
                         + " shared with " 
                         + student.owncloud
-                        ).format(students_current,students_total) )
+                        ).format(students_current, students_total) )
             except:
                 print(  "ERROR: Can't share folder " + remote_folder 
                         + " with " + student.owncloud)
