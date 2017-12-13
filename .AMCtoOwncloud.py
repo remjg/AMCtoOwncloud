@@ -308,8 +308,9 @@ def upload_and_share_quiz(owncloud_client, list_of_students, folder_base,
                     + remote_quiz_path
                     ).format(students_current, students_total) )
         except:
-            print("ERROR: Can't send file " + remote_quiz_path)
-            
+            print( ("ERROR: Can't send file " + remote_quiz_path
+                    + "\n{}").format(e) )    
+        
         # Share folders if necessary
         is_shared = False
         for file_share in owncloud_client.get_shares(remote_folder):
