@@ -1,4 +1,5 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
+# coding: utf-8
 #
 # Nautilus script that sends AMC annotated papers to Owncloud
 # Copyright (C) 2017 Rémi GROLLEAU
