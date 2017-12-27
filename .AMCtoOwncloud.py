@@ -147,11 +147,11 @@ def associate_quiz_to_student(list_of_quiz, dict_of_students, verbose=False):
     """ 
     matched_students = []
     unmatched_quiz = []
+    regular_expression = re.compile('[0-9]+')
     
     for quiz_path in list_of_quiz:
         # extract the first number in the file name
         quiz_name = os.path.basename(quiz_path)
-        regular_expression = re.compile('[0-9]+')
         student_number = re.search(regular_expression,quiz_name).group()
         try:
             # update the quiz attribute with file path
