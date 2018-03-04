@@ -3,16 +3,16 @@
 
 Each quiz file is uploaded to a remote folder unique to each student. Then the folder is shared (if not already) with the student who can be a local user or a remote user on another federated server.
 
-In the end, the remote folder structure will look like this (where the root folder `Quizzes/`, `Quiz 1`, and `Maths` are configurable):
+In the end, the remote folder structure will look like this (where the root folder `Quizzes/`, `Quiz 1`, and `Maths Quizzes` are configurable):
 
     Quizzes/
     ├── 3emeE/
-    |   ├── MOUSE Mickey (3998) - Maths/
+    |   ├── MOUSE Mickey (3998) - Maths Quizzes/
     │   │   └── Quiz 1 - MOUSE Mickey (3998).pdf
-    │   └── MOUSE Minnie (3999) - Maths/
+    │   └── MOUSE Minnie (3999) - Maths Quizzes/
     │       └── Quiz 1 - MOUSE Minnie (3999).pdf
     └── 4emeE/
-        └── DUCK Donald (4999) - Maths/
+        └── DUCK Donald (4999) - Maths Quizzes/
             └── Quiz 1 - DUCK Donald (3999).pdf
 
 ## Installation
