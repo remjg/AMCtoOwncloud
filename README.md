@@ -3,17 +3,17 @@
 
 Each quiz file is uploaded to a remote folder unique to each student. Then the folder is shared (if not already) with the student who can be a local user or a remote user on another federated server.
 
-In the end, the remote folder structure will look like this (where the root folder `Contrôles/` and `Quiz 1` are configurable):
+In the end, the remote folder structure will look like this (where the root folder `Quizzes/`, `Quiz 1`, and `Maths` are configurable):
 
-    Contrôles/
+    Quizzes/
     ├── 3emeE/
-    |   ├── MOUSE Mickey (3998) - Interros Maths/
+    |   ├── MOUSE Mickey (3998) - Maths/
     │   │   └── Quiz 1 - MOUSE Mickey (3998).pdf
-    │   └── MOUSE Minnie (3999) - Interros Maths/
+    │   └── MOUSE Minnie (3999) - Maths/
     │       └── Quiz 1 - MOUSE Minnie (3999).pdf
     └── 4emeE/
-        └── DUCK Donald (4999) - Interros Maths/
-           └── Quiz 1 - DUCK Donald (3999).pdf
+        └── DUCK Donald (4999) - Maths/
+            └── Quiz 1 - DUCK Donald (3999).pdf
 
 ## Installation
 Copy `AMCtoOwncloud.sh` and `.AMCtoOwncloud.py` in the Nautilus scripts folder: `~/.local/share/nautilus/scripts/`
@@ -27,12 +27,12 @@ You also need `gnome-terminal` or you will have to edit the `AMCtoOwncloud.sh` s
 
 ## Configuration
 
-Edit the `.AMCtoOwncloud.py` and change parameters at the beginning:
+Edit the `.AMCtoOwncloud.py` and change parameters at the end:
     
-    CSV_FILE_PATH = '/home/username/students.csv' # students information
-    OWNCLOUD_FOLDER = 'Contrôles/' # default folder for uploading files
-    OWNCLOUD_ADDRESS = 'http://MyOwnCloudProvider.com/'
-    OWNCLOUD_USERNAME = 'MyUserName'
+    CSV = '/path/to/csv/students.csv'
+    FOLDER = 'Quizzes/'
+    ADDRESS = 'https://ncloud.zaclys.com'
+    USERNAME = 'MyUserName'
     
 The CSV file containg all your student information must use colons `:` as separators and the following headers (there are optional parameters in function `get_students_from_csv()` to change this behaviour):
 
