@@ -250,7 +250,7 @@ class AMCtoOwncloud:
         self._cloud_client._session.auth = (username, password)
 
     def upload_and_share(self, folder_root="",
-                         folder_name=" - Interros Maths",
+                         folder_name=" - Maths Quizzes",
                          quiz_name=None,
                          share_with_user=True,
                          share_by_link=True):
@@ -344,7 +344,7 @@ class AMCtoOwncloud:
 ######### Script and parameters to tweak
 
 CSV = '/path/to/csv/students.csv'
-FOLDER = 'QuizzesFolder/'
+FOLDER = 'Quizzes/'
 ADDRESS = 'https://ncloud.zaclys.com'
 USERNAME = 'MyUserName'
 
