@@ -35,7 +35,7 @@ Edit the `.AMCtoOwncloud.py` and change parameters at the end:
     ADDRESS = 'https://ncloud.zaclys.com'
     USERNAME = 'MyUserName'
     
-The CSV file containing all your student information must use colons `:` as separators and the following headers (there are optional parameters in method `identify_students()` to change this behaviour, see below):
+The CSV file containing all your student information must use colons `:` as separators and the following headers (there are optional parameters in method `identify_students()` to change this behaviour, see [below](https://github.com/remjg/AMCtoOwncloud/blob/master/README.md#special-use-case)):
 
     group:surname:name:number:owncloud:email
     3emeE:MOUSE:Mickey:3998:cabitzmil:mickeymouse@domain.com
@@ -58,7 +58,7 @@ Then enter your *Owncloud* password, the name of the quiz, and wait:
 
 Every encountered issue should be displayed (unmatched files, login error, uploading or sharing errors).
 
-## Special use case
+## Special use cases
 
 To change the script behaviour, you can edit the last four lines:
 
