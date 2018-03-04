@@ -83,7 +83,7 @@ More options are available, see below for a full list of every parameters with d
                               owncloud_header="owncloud",
                               link_header="link")
     amcsend.connect_owncloud(address=ADDRESS, username=USERNAME, password=None, SSO=False)
-    amcsend.upload_and_share(folder_root=FOLDER, folder_name=" - Interros Maths",
+    amcsend.upload_and_share(folder_root=FOLDER, folder_name=" - Maths Quizzes",
                                                  quiz_name=None,
                                                  share_with_user=True,
                                                  share_by_link=True)
