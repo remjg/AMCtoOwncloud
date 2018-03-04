@@ -28,7 +28,7 @@ You also need `gnome-terminal` or you will have to edit the `AMCtoOwncloud.sh` s
 
 ## Configuration
 
-Edit the `.AMCtoOwncloud.py` and change parameters at the end:
+Edit the `.AMCtoOwncloud.py` and change the parameters at the end:
     
     CSV = '/path/to/csv/students.csv'
     FOLDER = 'Quizzes/'
