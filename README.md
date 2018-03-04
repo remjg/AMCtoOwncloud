@@ -21,7 +21,8 @@ Copy `AMCtoOwncloud.sh` and `.AMCtoOwncloud.py` in the Nautilus scripts folder: 
 <img src="/docs/InstallingScript.png" width="600x">
 
 In order to make it work, you need to install the following Python modules:
-`os`, `csv`, `re`, `getpass`, `requests`, `lxml.html`, `owncloud` (see [pyocclient](https://github.com/owncloud/pyocclient))
+
+`os`, `csv`, `re`, `getpass`, `requests`, `lxml.html`, `owncloud` (see [pyocclient](https://github.com/owncloud/pyocclient)).
 
 You also need `gnome-terminal` or you will have to edit the `AMCtoOwncloud.sh` script file to use another terminal.
 
@@ -34,7 +35,7 @@ Edit the `.AMCtoOwncloud.py` and change parameters at the end:
     ADDRESS = 'https://ncloud.zaclys.com'
     USERNAME = 'MyUserName'
     
-The CSV file containg all your student information must use colons `:` as separators and the following headers (there are optional parameters in function `get_students_from_csv()` to change this behaviour):
+The CSV file containing all your student information must use colons `:` as separators and the following headers (there are optional parameters in function `get_students_from_csv()` to change this behaviour):
 
     group:surname:name:number:owncloud:email
     3emeE:MOUSE:Mickey:3998:cabitzmil:mickeymouse@domain.com
@@ -58,10 +59,31 @@ Then enter your *Owncloud* password, the name of the quiz, and wait:
 Every encountered issue should be displayed (unmatched files, login error, uploading or sharing errors).
 
 ## Special use case
-If your *Owncloud* server is behind a *Central Authentication Service (CAS)*, you might want to use `connect_owncloud_behind_sso()` instead of `connect_owncloud()`.
-If that is the case, you just have to comment/uncomment the following lines as follow:
 
-    #owncloud_client = connect_owncloud(OWNCLOUD_ADDRESS, OWNCLOUD_USERNAME)
-    owncloud_client = connect_owncloud_behind_sso(OWNCLOUD_ADDRESS, OWNCLOUD_USERNAME)
-    
-Tested with the Virtual Learning Environment [Envole](https://envole.ac-dijon.fr) of a school that use CAS fo authentication.
+To change the script behaviour, you can edit the last four lines:
+
+    amcsend = AMCtoOwncloud()
+    amcsend.identify_students(csv_file_path=CSV)
+    amcsend.connect_owncloud(address=ADDRESS, username=USERNAME, SSO=False)
+    amcsend.upload_and_share(folder_root=FOLDER)
+
+For instance, if your *Owncloud* server is behind a *Central Authentication Service (CAS)*, you might want to use the parameter `SSO=True`. It has been tested with the Virtual Learning Environment [Envole](https://envole.ac-dijon.fr) of a school that use CAS fo authentication.
+
+More options are available, see below for a full list of every parameters with default values:
+
+    amcsend = AMCtoOwncloud(list_of_paths=None, verbose=False)
+    amcsend.identify_students(csv_file_path=CSV, verbose=False, debug=False,
+                              csv_delimiter=":",
+                              csv_comment="#",
+                              name_header="name",
+                              surname_header="surname",
+                              group_header="group",
+                              number_header="number",
+                              email_header="email",
+                              owncloud_header="owncloud",
+                              link_header="link")
+    amcsend.connect_owncloud(address=ADDRESS, username=USERNAME, password=None, SSO=False)
+    amcsend.upload_and_share(folder_root=FOLDER, folder_name=" - Interros Maths",
+                                                 quiz_name=None,
+                                                 share_with_user=True,
+                                                 share_by_link=True)
