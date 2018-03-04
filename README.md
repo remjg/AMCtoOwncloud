@@ -69,7 +69,7 @@ To change the script behaviour, you can edit the last four lines:
 
 For instance, if your *Owncloud* server is behind a *Central Authentication Service (CAS)*, you might want to use the parameter `SSO=True`. It has been tested with the Virtual Learning Environment [Envole](https://envole.ac-dijon.fr) of a school that use CAS fo authentication.
 
-More options are available, see below for a full list of every parameters with default values:
+More options are available, see below for a full list of parameters with default values:
 
     amcsend = AMCtoOwncloud(list_of_paths=None, verbose=False)
     amcsend.identify_students(csv_file_path=CSV, verbose=False, debug=False,
