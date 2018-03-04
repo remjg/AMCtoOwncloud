@@ -1,7 +1,7 @@
 # AMCtoOwncloud
 *AMCtoOwncloud* is a *Nautilus script* that sends *[Auto Multiple Choice](http://auto-multiple-choice.net/)* (*AMC*) annotated papers to *Owncloud/Nextcloud* and share them with the corresponding students.
 
-Each quiz file is uploaded to a remote folder unique to each student. Then the folder is shared (if not already) with the student who can be a local user or a remote user on another federated server.
+Each quiz file is uploaded to a remote folder unique to each student. Then the folder is shared (default behaviour) with the student who can be a local user or a remote user on another federated server.
 
 In the end, the remote folder structure will look like this (where the root folder `Quizzes/`, `Quiz 1`, and `Maths Quizzes` are configurable):
 
@@ -35,7 +35,7 @@ Edit the `.AMCtoOwncloud.py` and change parameters at the end:
     ADDRESS = 'https://ncloud.zaclys.com'
     USERNAME = 'MyUserName'
     
-The CSV file containing all your student information must use colons `:` as separators and the following headers (there are optional parameters in function `get_students_from_csv()` to change this behaviour):
+The CSV file containing all your student information must use colons `:` as separators and the following headers (there are optional parameters in method `identify_students()` to change this behaviour, see below):
 
     group:surname:name:number:owncloud:email
     3emeE:MOUSE:Mickey:3998:cabitzmil:mickeymouse@domain.com
