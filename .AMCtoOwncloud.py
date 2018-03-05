@@ -339,7 +339,12 @@ class AMCtoOwncloud:
                           f' shared with user "{student.owncloud}"\n{e}')
 
             # Share folders by link if necessary
-            # TODO
+            if share_by_link:
+                share_obj = self._cloud_client.share_file_with_link(
+                                                                folder_student)
+                student.link = share_obj.get_link()
+                print(f"{display_counter} Folder"
+                      f' shared by link "{student.link}"')
 
 ######### Script and parameters to tweak
 
