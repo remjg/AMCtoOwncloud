@@ -83,6 +83,10 @@ class AMCtoOwncloud:
         If no path is provided, get paths from Nautilus file manager.
         Create a _list_of_files attribute.
         """
+        self._cloud_client = None
+        self._dict_of_students = None
+        self._matched_students = None
+        self._list_of_files = []
         # Retrieve paths selected in Nautilus if files/folders not provided
         if not list_of_paths:
             try:
@@ -93,7 +97,6 @@ class AMCtoOwncloud:
                       f" neither selected in Nautilus")
 
         # Keep files which are not sym link and parse folders
-        self._list_of_files = []
         for path in list_of_paths.splitlines():
             # path is a file: keep if not sym link
             if os.path.isfile(path):
