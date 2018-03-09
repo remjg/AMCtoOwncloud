@@ -19,6 +19,15 @@ In the end, the remote folder structure will look like this (where the root fold
         └── DUCK Donald (4999) - Maths Quizzes/
             └── Quiz 1 - DUCK Donald (3999).pdf
 
+If you don't have groups specified in you `.csv` file, and you live the root folder empty `''`, it can also look like this: 
+
+    MOUSE Mickey (3998) - Maths Quizzes/
+        └── Quiz 1 - MOUSE Mickey (3998).pdf
+    MOUSE Minnie (3999) - Maths Quizzes/
+        └── Quiz 1 - MOUSE Minnie (3999).pdf
+    DUCK Donald (4999) - Maths Quizzes/
+        └── Quiz 1 - DUCK Donald (3999).pdf
+
 ## Installation
 Copy `AMCtoOwncloud.sh` and `.AMCtoOwncloud.py` in the Nautilus scripts folder: `~/.local/share/nautilus/scripts/`
 
