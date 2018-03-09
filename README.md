@@ -7,7 +7,7 @@ Each quiz file is uploaded to a remote folder unique to each student. Then each 
 
 Eventually, shared links are saved to a newly created `.csv` file (default behaviour) or to the current `.csv` file.
 
-In the end, the remote folder structure will look like this (where the root folder `Quizzes/`, `Quiz 1`, and `Maths Quizzes` are configurable):
+In the end, the remote folder structure will look like this:
 
     Quizzes/
     ├── 3emeE/
@@ -19,7 +19,7 @@ In the end, the remote folder structure will look like this (where the root fold
         └── DUCK Donald (4999) - Maths Quizzes/
             └── Quiz 1 - DUCK Donald (3999).pdf
 
-If you don't have groups specified in you `.csv` file, and you live the root folder empty `''`, it can also look like this: 
+But the root folder `Quizzes/`, `Quiz 1`, and `Maths Quizzes` are configurable, and the other fields come from the `.csv` file. For instance, If you don't have groups specified in you `.csv` file, and you live the root folder empty `''`, it can also look like this: 
 
     MOUSE Mickey (3998) - Maths Quizzes/
         └── Quiz 1 - MOUSE Mickey (3998).pdf
