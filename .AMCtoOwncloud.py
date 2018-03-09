@@ -26,6 +26,7 @@ import requests  # for owncloud behind SSO only
 import lxml.html  # for owncloud behind SSO only
 import math
 import datetime
+import shutil
 from pathlib import Path
 
 ######### Implementation
