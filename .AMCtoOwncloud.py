@@ -385,15 +385,12 @@ class AMCtoOwncloud:
                                      if not row.startswith(csv_comment)),
                                     delimiter=csv_delimiter,
                                     quoting=csv.QUOTE_MINIMAL)
-            # If no "link" header, add it at the end but before unamed fieds
+            # Remove empty fields in original file
+            tab_in.fieldnames = [i for i in tab_in.fieldnames if i]
+            # If no "link" header, add it at the end
             fieldnames = tab_in.fieldnames.copy()
             if link_header not in fieldnames:
-                try:
-                    empty_header_index = fieldnames.index(None)
-                    fieldnames[empty_header_index] = link_header
-                except ValueError:
-                    fieldnames.append(link_header)
-            fieldnames.append(None)
+                fieldnames.append(link_header)
             tab_out = csv.DictWriter(csv_out, fieldnames=fieldnames,
                                      delimiter=csv_delimiter,
                                      quoting=csv.QUOTE_MINIMAL)
@@ -404,23 +401,25 @@ class AMCtoOwncloud:
                 link = self._dict_of_students[row[number_header]].link
                 if row.get(link_header) != link:
                     row[link_header] = link
-                # Hack... If 2 or more unamed fields: temporarily create
-                # fieldnames to save them separately (and avoid quoting)
+                # Hack... If 2 or more unamed fields (stored in key None):
+                # temporarily create fieldnames to save them separately
+                # (and avoid quoting)
                 if isinstance(row.get(None), list):
+                    # remove the last empty fields
+                    while row[None] and (not (row[None])[-1]):
+                        del (row[None])[-1]
                     # Create additional fields for unamed fields
                     additional_fields = {"_Add" + str(i): new_field
                                          for i, new_field
                                          in enumerate(row.get(None))}
                     row.update(additional_fields)
                     tab_out.fieldnames.extend(additional_fields.keys())
-                    # Temporarily delete field None and save CSV row
-                    tab_out.fieldnames.remove(None)
+                    # Delete field None and save CSV row
                     del row[None]
                     tab_out.writerow(row)
                     # Remove additional fields and restore field None
                     for i in range(len(additional_fields)):
                         del tab_out.fieldnames[-1]
-                    tab_out.fieldnames.append(None)
                 else:
                     tab_out.writerow(row)
 
