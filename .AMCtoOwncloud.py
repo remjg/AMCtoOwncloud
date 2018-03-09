@@ -364,7 +364,8 @@ class AMCtoOwncloud:
                 student.link = share_obj.get_link()
                 print(f"{display_counter} Folder"
                       f' shared by link "{student.link}"')
-        self._write_links_to_csv(replace_csv=replace_csv)
+        if share_by_link:
+            self._write_links_to_csv(replace_csv=replace_csv)
 
     def _write_links_to_csv(self, replace_csv=False):
         # Get .csv file details from _csvfile attribute
