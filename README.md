@@ -58,7 +58,7 @@ Finally, **annotated papers must contain the student number** in their name
 
 Then enter your *Owncloud* password, the name of the quiz, and wait:
 
-<img src="/docs/UsingScript2-Output.png" width="600x">
+<img src="/docs/UsingScript2-Output.png" width="800x">
 
 Every encountered issue should be displayed (unmatched files, login error, uploading or sharing errors).
 
