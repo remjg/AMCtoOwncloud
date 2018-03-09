@@ -67,7 +67,7 @@ Every encountered issue should be displayed (unmatched files, login error, uploa
 To change the script behaviour, you can edit the last four lines:
 
     amcsend = AMCtoOwncloud()
-    amcsend.identify_students(csv_file_path=CSV)
+    amcsend.identify_students(csv_filepath=CSV)
     amcsend.connect_owncloud(address=ADDRESS, username=USERNAME, SSO=False)
     amcsend.upload_and_share(folder_root=FOLDER, replace_csv=False)
 
@@ -78,7 +78,7 @@ You can also save shared links to the current `.csv` file with `replace_csv=True
 More options are available, see below for a full list of parameters with default values:
 
     amcsend = AMCtoOwncloud(list_of_paths=None, verbose=False)
-    amcsend.identify_students(csv_file_path=CSV, verbose=False, debug=False,
+    amcsend.identify_students(csv_filepath=CSV, verbose=False, debug=False,
                               csv_delimiter=":",
                               csv_comment="#",
                               name_header="name",
