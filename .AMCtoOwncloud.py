@@ -25,6 +25,8 @@ import getpass
 import requests  # for owncloud behind SSO only
 import lxml.html  # for owncloud behind SSO only
 import math
+import datetime
+from pathlib import Path
 
 ######### Implementation
 
@@ -84,6 +86,7 @@ class AMCtoOwncloud:
         Create a _list_of_files attribute.
         """
         self._cloud_client = None
+        self._csvfile = None
         self._dict_of_students = None
         self._matched_students = None
         self._list_of_files = []
@@ -113,16 +116,16 @@ class AMCtoOwncloud:
         if verbose:
             print(" " + "\n ".join(self._list_of_files))
 
-    def identify_students(self, csv_file_path, verbose=False, **kwargs):
+    def identify_students(self, csv_filepath, verbose=False, **kwargs):
         """
         Link each file to the corresponding student.
 
         Create a _matched_students attribute which is a list of students.
         """
-        self._get_students_from_csv(csv_file_path, verbose=verbose, **kwargs)
+        self._get_students_from_csv(csv_filepath, verbose=verbose, **kwargs)
         self._associate_quiz_to_student(verbose=verbose)
 
-    def _get_students_from_csv(self, csv_file_path, verbose,
+    def _get_students_from_csv(self, csv_filepath, verbose,
                                csv_delimiter=":",
                                csv_comment="#",
                                name_header="name",
@@ -136,10 +139,19 @@ class AMCtoOwncloud:
         """Extract student information from a CSV file.
 
         Store students in a dictionary (key = number, value = student object).
+        Save .csv file important details in a _csvfile attribute
         Create a _dict_of_students attribute.
         """
+        # Save important .csv parameters for later
+        self._csvfile = {}
+        self._csvfile["csv_filepath"] = csv_filepath
+        self._csvfile["csv_delimiter"] = csv_delimiter
+        self._csvfile["csv_comment"] = csv_comment
+        self._csvfile["number_header"] = number_header
+        self._csvfile["link_header"] = link_header
+        # Create dictionary
         self._dict_of_students = {}
-        with open(csv_file_path, newline="") as csv_file:
+        with open(csv_filepath, newline="") as csv_file:
             tab = csv.DictReader((row for row in csv_file
                                  if not row.startswith(csv_comment)),
                                  delimiter=csv_delimiter)
@@ -157,7 +169,7 @@ class AMCtoOwncloud:
                 self._dict_of_students[student.number] = student
 
         print(f'\n{len(self._dict_of_students)} students found'
-              f' in "{csv_file_path}"')
+              f' in "{csv_filepath}"')
         if debug:
             for student in self._dict_of_students.values():
                 print(student)
@@ -256,7 +268,8 @@ class AMCtoOwncloud:
                          folder_name=" - Maths Quizzes",
                          quiz_name=None,
                          share_with_user=True,
-                         share_by_link=True):
+                         share_by_link=True,
+                         replace_csv=False):
         """Create remote folders, upload files, share with user and/or by link.
 
         - Create remote folders for each students (if not already there):
@@ -264,6 +277,8 @@ class AMCtoOwncloud:
         - Upload quizzes named like this:
         "User input - Surname Name (Number).ext"
         - Share folders with the corresponding students (if not already done)
+        - Share folders by link
+        - Save links to .csv (if replace_csv=True)
         """
         if quiz_name is None:
             quiz_name = input('\nEnter quiz name: ')
@@ -348,6 +363,72 @@ class AMCtoOwncloud:
                 student.link = share_obj.get_link()
                 print(f"{display_counter} Folder"
                       f' shared by link "{student.link}"')
+        self._write_links_to_csv(replace_csv=replace_csv)
+
+    def _write_links_to_csv(self, replace_csv=False):
+        # Get .csv file details from _csvfile attribute
+        csv_filepath = self._csvfile["csv_filepath"]
+        csv_delimiter = self._csvfile["csv_delimiter"]
+        csv_comment = self._csvfile["csv_comment"]
+        number_header = self._csvfile["number_header"]
+        link_header = self._csvfile["link_header"]
+        # New temporary .csv file path
+        new_filename = (Path(csv_filepath).stem + "-" +
+                        datetime.datetime.now().isoformat(timespec="minutes") +
+                        ".csv")
+        new_filepath = Path(csv_filepath).with_name(new_filename)
+        # Save links to the new temporary .csv file
+        with open(csv_filepath, 'r', newline="") as csv_in, \
+             open(new_filepath, 'w', newline="") as csv_out:
+            tab_in = csv.DictReader((row for row in csv_in
+                                     if not row.startswith(csv_comment)),
+                                    delimiter=csv_delimiter,
+                                    quoting=csv.QUOTE_MINIMAL)
+            # If no "link" header, add it at the end but before unamed fieds
+            fieldnames = tab_in.fieldnames.copy()
+            if link_header not in fieldnames:
+                try:
+                    empty_header_index = fieldnames.index(None)
+                    fieldnames[empty_header_index] = link_header
+                except ValueError:
+                    fieldnames.append(link_header)
+            fieldnames.append(None)
+            tab_out = csv.DictWriter(csv_out, fieldnames=fieldnames,
+                                     delimiter=csv_delimiter,
+                                     quoting=csv.QUOTE_MINIMAL)
+            tab_out.writeheader()
+            # Write file with link value if not present or different
+            # TODO: comment line starting with a '#' are lost in the process
+            for row in tab_in:
+                link = self._dict_of_students[row[number_header]].link
+                if row.get(link_header) != link:
+                    row[link_header] = link
+                # Hack... If 2 or more unamed fields: temporarily create
+                # fieldnames to save them separately (and avoid quoting)
+                if isinstance(row.get(None), list):
+                    # Create additional fields for unamed fields
+                    additional_fields = {"_Add" + str(i): new_field
+                                         for i, new_field
+                                         in enumerate(row.get(None))}
+                    row.update(additional_fields)
+                    tab_out.fieldnames.extend(additional_fields.keys())
+                    # Temporarily delete field None and save CSV row
+                    tab_out.fieldnames.remove(None)
+                    del row[None]
+                    tab_out.writerow(row)
+                    # Remove additional fields and restore field None
+                    for i in range(len(additional_fields)):
+                        del tab_out.fieldnames[-1]
+                    tab_out.fieldnames.append(None)
+                else:
+                    tab_out.writerow(row)
+
+        # Replace the original .csv file if asked
+        if replace_csv:
+            shutil.move(new_filepath, csv_filepath)
+            print(f'Shared links saved to current .csv file "{csv_filepath}"')
+        else:
+            print(f'Shared links saved to new .csv file "{new_filepath}"')
 
 ######### Script and parameters to tweak
 
@@ -359,4 +440,4 @@ USERNAME = 'MyUserName'
 amcsend = AMCtoOwncloud()
 amcsend.identify_students(csv_file_path=CSV)
 amcsend.connect_owncloud(address=ADDRESS, username=USERNAME, SSO=False)
-amcsend.upload_and_share(folder_root=FOLDER)
+amcsend.upload_and_share(folder_root=FOLDER, replace_csv=False)
