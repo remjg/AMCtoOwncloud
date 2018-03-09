@@ -19,7 +19,7 @@ In the end, the remote folder structure will look like this:
         └── DUCK Donald (4999) - Maths Quizzes/
             └── Quiz 1 - DUCK Donald (3999).pdf
 
-But the root folder `Quizzes/`, `Quiz 1`, and `Maths Quizzes` are configurable, and the other fields come from the `.csv` file. For instance, If you don't have groups specified in you `.csv` file, and you live the root folder empty `''`, it can also look like this: 
+But the root folder `Quizzes/`, `Quiz 1`, and `Maths Quizzes` are configurable, and the other fields come from the `.csv` file. For instance, If you don't have groups specified in you `.csv` file, and you leave the root folder empty `''`, it can also look like this: 
 
     MOUSE Mickey (3998) - Maths Quizzes/
         └── Quiz 1 - MOUSE Mickey (3998).pdf
