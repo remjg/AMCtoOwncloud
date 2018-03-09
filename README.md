@@ -1,7 +1,11 @@
 # AMCtoOwncloud
 *AMCtoOwncloud* is a *Nautilus script* that sends *[Auto Multiple Choice](http://auto-multiple-choice.net/)* (*AMC*) annotated papers to *Owncloud/Nextcloud* and share them with the corresponding students.
 
-Each quiz file is uploaded to a remote folder unique to each student. Then the folder is shared (default behaviour) with the student who can be a local user or a remote user on another federated server.
+Each quiz file is uploaded to a remote folder unique to each student. Then each folder is:
+ * shared with the student who can be a local user or a remote user on another federated server
+ * shared by link
+
+Eventually, shared links are saved to a newly created `.csv` file (default behaviour) or to the current `.csv` file.
 
 In the end, the remote folder structure will look like this (where the root folder `Quizzes/`, `Quiz 1`, and `Maths Quizzes` are configurable):
 
@@ -22,7 +26,7 @@ Copy `AMCtoOwncloud.sh` and `.AMCtoOwncloud.py` in the Nautilus scripts folder: 
 
 In order to make it work, you need to install the following Python modules:
 
-`os`, `csv`, `re`, `getpass`, `requests`, `lxml.html`, `owncloud` (see [pyocclient](https://github.com/owncloud/pyocclient)).
+`requests`, `lxml.html`, `owncloud` (see [pyocclient](https://github.com/owncloud/pyocclient)).
 
 You also need `gnome-terminal` or you will have to edit the `AMCtoOwncloud.sh` script file to use another terminal.
 
@@ -65,9 +69,11 @@ To change the script behaviour, you can edit the last four lines:
     amcsend = AMCtoOwncloud()
     amcsend.identify_students(csv_file_path=CSV)
     amcsend.connect_owncloud(address=ADDRESS, username=USERNAME, SSO=False)
-    amcsend.upload_and_share(folder_root=FOLDER)
+    amcsend.upload_and_share(folder_root=FOLDER, replace_csv=False)
 
 For instance, if your *Owncloud* server is behind a *Central Authentication Service (CAS)*, you might want to use the parameter `SSO=True`. It has been tested with the Virtual Learning Environment [Envole](https://envole.ac-dijon.fr) of a school that use CAS fo authentication.
+
+You can also save shared links to the current `.csv` file with `replace_csv=True`. Make sure to backup before and be aware that *comment lines starting with a `#` are lost in the process*.
 
 More options are available, see below for a full list of parameters with default values:
 
@@ -86,4 +92,5 @@ More options are available, see below for a full list of parameters with default
     amcsend.upload_and_share(folder_root=FOLDER, folder_name=" - Maths Quizzes",
                                                  quiz_name=None,
                                                  share_with_user=True,
-                                                 share_by_link=True)
+                                                 share_by_link=True,
+                                                 replace_csv=False)
