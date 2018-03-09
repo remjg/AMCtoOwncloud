@@ -438,6 +438,6 @@ ADDRESS = 'https://ncloud.zaclys.com'
 USERNAME = 'MyUserName'
 
 amcsend = AMCtoOwncloud()
-amcsend.identify_students(csv_file_path=CSV)
+amcsend.identify_students(csv_filepath=CSV)
 amcsend.connect_owncloud(address=ADDRESS, username=USERNAME, SSO=False)
 amcsend.upload_and_share(folder_root=FOLDER, replace_csv=False)
