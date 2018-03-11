@@ -28,6 +28,17 @@ But the root folder `Quizzes/`, `Quiz 1`, and `Maths Quizzes` are configurable, 
     DUCK Donald (4999) - Maths Quizzes/
         └── Quiz 1 - DUCK Donald (3999).pdf
 
+## Use
+*Right click* on the annotated papers (or on folders) and go to the submenu *scripts*:
+
+<img src="/docs/UsingScript1-Menu.png" width="600x">
+
+Then enter your *Owncloud* password, the name of the quiz, and wait:
+
+<img src="/docs/UsingScript2-Output.png" width="800x">
+
+Every encountered issue should be displayed (unmatched files, login error, uploading or sharing errors).
+
 ## Installation
 Copy `AMCtoOwncloud.sh` and `.AMCtoOwncloud.py` in the Nautilus scripts folder: `~/.local/share/nautilus/scripts/`
 
@@ -59,17 +70,6 @@ Finally, **annotated papers must contain the student number** in their name
 (the first number of the file name is extracted to associate each quiz to the corresponding student). Don't forget to configure *auto-multiple-choice* using the column headers of your `.csv` file:
 
 <img src="/docs/RenamingAnnotatedPapers.png" width="400x">
-    
-## Use
-*Right click* on the annotated papers (or on folders) and go to the submenu *scripts*:
-
-<img src="/docs/UsingScript1-Menu.png" width="600x">
-
-Then enter your *Owncloud* password, the name of the quiz, and wait:
-
-<img src="/docs/UsingScript2-Output.png" width="800x">
-
-Every encountered issue should be displayed (unmatched files, login error, uploading or sharing errors).
 
 ## Special use cases
 
