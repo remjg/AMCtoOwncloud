@@ -1,0 +1,43 @@
+\documentclass[a4paper,12pt,french]{article}
+
+\usepackage{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[height=250mm, width=183mm]{geometry}
+
+\usepackage{csvsimple}
+\usepackage[colorlinks=true, urlcolor=black, linkcolor=black]{hyperref} % liens hypertexte
+\usepackage{qrcode}
+
+\begin{document}
+
+\csvreader[
+  head to column names,
+  filter equal={\group}{4emeA},
+  ]{students.csv}{}{%
+  \noindent
+  \begin{minipage}{\linewidth}
+    \hfill\textbf{\group\quad\surname\quad\name}\hfill\smallskip
+
+    \noindent
+    Madame, Monsieur,\medskip
+
+    \noindent
+    Veuillez trouver ci-dessous un \emph{lien internet} permettant d'accéder aux évaluations en Mathématiques :
+    \begin{center}
+      \url{\link}
+    \end{center}
+    Vous pouvez également y accéder plus simplement en scannant le \emph{QR code} suivant :
+    \begin{center}
+      \qrcode[height=2.1cm]{\link}
+    \end{center}
+    Cordialement,
+
+    \hfill R.G.
+  \end{minipage}
+  \vfill
+  \noindent\hrulefill
+  \vfill
+}
+
+\end{document}
