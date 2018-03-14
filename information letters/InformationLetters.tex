@@ -13,7 +13,7 @@
 
 \csvreader[
   head to column names,
-  filter equal={\group}{4emeA},
+  filter=\equal{\group}{4emeA} \and \not \equal{\link}{},
   ]{students.csv}{}{%
   \noindent
   \begin{minipage}{\linewidth}
