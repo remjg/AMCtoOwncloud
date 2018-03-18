@@ -1,4 +1,5 @@
 # AMCtoOwncloud
+
 *AMCtoOwncloud* is a *Nautilus script* that sends *[Auto Multiple Choice](http://auto-multiple-choice.net/)* (*AMC*) annotated papers to *Owncloud/Nextcloud* and share them with the corresponding students.
 
 Each quiz file is uploaded to a remote folder unique to each student. Then each folder is:
@@ -29,6 +30,7 @@ But the root folder `Quizzes/`, `Quiz 1`, and `Maths Quizzes` are configurable, 
         └── Quiz 1 - DUCK Donald (3999).pdf
 
 ## Use
+
 *Right click* on the annotated papers (or on folders) and go to the submenu *scripts*:
 
 <img src="/docs/UsingScript1-Menu.png" width="600x">
@@ -40,6 +42,7 @@ Then enter your *Owncloud* password, the name of the quiz, and wait:
 Every encountered issue should be displayed (unmatched files, login error, uploading or sharing errors).
 
 ## Installation
+
 Copy `AMCtoOwncloud.sh` and `.AMCtoOwncloud.py` in the Nautilus scripts folder: `~/.local/share/nautilus/scripts/`
 
 <img src="/docs/InstallingScript.png" width="600x">
@@ -106,6 +109,6 @@ More options are available, see below for a full list of parameters with default
 
 ## Generating information letters
 
-A LaTeX document is also available in the folder `/information letters/` to generate information letters for each student:
+A LaTeX document is also available in the folder `/information letters/` to print share links together with the corresponding QR codes:
 
 <img src="/docs/InformationLetter.png" width="600x">
