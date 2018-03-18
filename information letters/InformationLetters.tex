@@ -15,7 +15,7 @@
   head to column names,
   separator=semicolon, % other options: comma ',' or pipe '|'
   before reading=\shorthandoff{;}, % for french language and semicolon separator only
-  filter=\equal{\group}{4emeA} \and \not \equal{\link}{},
+  filter=\not \equal{\link}{}, % add `\and \equal{\group}{4emeA}` to filter groups
   ]{students.csv}{}{%
   \noindent
   \begin{minipage}{\linewidth}
