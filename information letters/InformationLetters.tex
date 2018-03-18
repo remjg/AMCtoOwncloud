@@ -1,18 +1,20 @@
 \documentclass[a4paper,12pt,french]{article}
 
-\usepackage{babel}
-\usepackage[utf8x]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
 \usepackage[height=250mm, width=183mm]{geometry}
 
 \usepackage{csvsimple}
-\usepackage[colorlinks=true, urlcolor=black, linkcolor=black]{hyperref} % liens hypertexte
+\usepackage[colorlinks=true, urlcolor=black, linkcolor=black]{hyperref}
 \usepackage{qrcode}
 
 \begin{document}
 
 \csvreader[
   head to column names,
+  separator=semicolon, % other options: comma ',' or pipe '|'
+  before reading=\shorthandoff{;}, % for french language and semicolon separator only
   filter=\equal{\group}{4emeA} \and \not \equal{\link}{},
   ]{students.csv}{}{%
   \noindent
