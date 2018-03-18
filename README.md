@@ -59,12 +59,12 @@ Edit the `.AMCtoOwncloud.py` and change the parameters at the end:
     ADDRESS = 'https://ncloud.zaclys.com'
     USERNAME = 'MyUserName'
     
-The CSV file containing all your student information must use colons `:` as separators and the following headers (there are optional parameters in method `identify_students()` to change this behaviour, see [below](https://github.com/remjg/AMCtoOwncloud/blob/master/README.md#special-use-case)):
+The CSV file containing all your student information must use semicolons `;` as separators and the following headers (there are optional parameters in method `identify_students()` to change this behaviour, see [below](https://github.com/remjg/AMCtoOwncloud/blob/master/README.md#special-use-case)):
 
-    group:surname:name:number:owncloud:email
-    3emeE:MOUSE:Mickey:3998:cabitzmil:mickeymouse@domain.com
-    3emeE:MOUSE:Minnie:3999:agrevet:minniemouse@domain.com
-    4emeE:DUCK:Donald:4999:prenaud@aFederatedServer.com:donaldduck@domain.com
+    group;surname;name;number;owncloud;email
+    3emeE;MOUSE;Mickey;3998;cabitzmil;mickeymouse@domain.com
+    3emeE;MOUSE;Minnie;3999;agrevet;minniemouse@domain.com
+    4emeE;DUCK;Donald;4999;prenaud@aFederatedServer.com;donaldduck@domain.com
     
 Finally, **annotated papers must contain the student number** in their name
 (the first number of the file name is extracted to associate each quiz to the corresponding student). Don't forget to configure *auto-multiple-choice* using the column headers of your `.csv` file:
@@ -88,7 +88,7 @@ More options are available, see below for a full list of parameters with default
 
     amcsend = AMCtoOwncloud(list_of_paths=None, verbose=False)
     amcsend.identify_students(csv_filepath=CSV, verbose=False, debug=False,
-                              csv_delimiter=":",
+                              csv_delimiter=";",
                               csv_comment="#",
                               name_header="name",
                               surname_header="surname",
