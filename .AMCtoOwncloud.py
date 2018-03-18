@@ -132,7 +132,7 @@ class AMCtoOwncloud:
                                name_header="name",
                                surname_header="surname",
                                group_header="group",
-                               number_header="number",
+                               number_header="id",
                                email_header="email",
                                owncloud_header="owncloud",
                                link_header="link",
