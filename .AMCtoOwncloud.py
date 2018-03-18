@@ -127,7 +127,7 @@ class AMCtoOwncloud:
         self._associate_quiz_to_student(verbose=verbose)
 
     def _get_students_from_csv(self, csv_filepath, verbose,
-                               csv_delimiter=":",
+                               csv_delimiter=";",
                                csv_comment="#",
                                name_header="name",
                                surname_header="surname",
