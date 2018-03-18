@@ -103,3 +103,9 @@ More options are available, see below for a full list of parameters with default
                                                  share_with_user=True,
                                                  share_by_link=True,
                                                  replace_csv=False)
+
+## Generating information letters
+
+A LaTeX document is also available in the folder `/information letters/` to generate information letters for each student:
+
+<img src="/docs/InformationLetter.png" width="600x">
