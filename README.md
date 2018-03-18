@@ -61,7 +61,7 @@ Edit the `.AMCtoOwncloud.py` and change the parameters at the end:
     
 The CSV file containing all your student information must use semicolons `;` as separators and the following headers (there are optional parameters in method `identify_students()` to change this behaviour, see [below](https://github.com/remjg/AMCtoOwncloud/blob/master/README.md#special-use-case)):
 
-    group;surname;name;number;owncloud;email
+    group;surname;name;id;owncloud;email
     3emeE;MOUSE;Mickey;3998;cabitzmil;mickeymouse@domain.com
     3emeE;MOUSE;Minnie;3999;agrevet;minniemouse@domain.com
     4emeE;DUCK;Donald;4999;prenaud@aFederatedServer.com;donaldduck@domain.com
