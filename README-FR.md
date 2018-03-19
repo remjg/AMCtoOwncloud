@@ -20,7 +20,7 @@ Après exécution du programme, la hiérarchie des fichiers est la suivante :
         └── DUCK Donald (4999) - Interros Maths/
             └── Interro 1 - DUCK Donald (3999).pdf
 
-Les noms `Contrôles/`, `Interro 1`, et `Interros Maths` sont modifiables, et les autres champs sont extraits du fichier `.csv` des étudiants. Par exemple, si vous n'avez pas de classes saisies dans votre fichier `.csv`, et si vous dossier racine est vide `''`, l'organisation des fichiers deviendra : 
+Les noms `Contrôles`, `Interro 1`, et `Interros Maths` sont modifiables, et les autres champs sont extraits du fichier `.csv` des étudiants. Par exemple, si vous n'avez pas de classes saisies dans votre fichier `.csv`, et si vous dossier racine est vide `''`, l'organisation des fichiers deviendra : 
 
     MOUSE Mickey (3998) - Interros Maths/
         └── Interro 1 - MOUSE Mickey (3998).pdf
@@ -39,7 +39,7 @@ Saisir le mot de passe *Owncloud* , le nom du contrôle, et attendre :
 
 <img src="/docs/UsingScript2-Output.png" width="800x">
 
-Les éventuels problèmes recontrés devraient être indiqués (erreurs d'identification, d'envoi ou de partage, fichiers non associés à des étudiants).
+Les éventuels problèmes rencontrés devraient être indiqués (erreurs d'identification, d'envoi ou de partage, fichiers non associés à des étudiants, etc...).
 
 ## Installation
 
@@ -50,6 +50,10 @@ Copier `AMCtoOwncloud.sh` and `.AMCtoOwncloud.py` dans le répertoire des script
 Installer les modules Python suivants :
 
 `requests`, `lxml.html`, `owncloud` (voir [pyocclient](https://github.com/owncloud/pyocclient)).
+
+Généralement, les premiers sont déjà présents sous forme de paquets dans votre distribution. Pour installer le module `owncloud`, j'utilise la commande suivante :
+
+    pip3 install pyocclient
 
 Vérifier que `gnome-terminal` est installé ou éditer le fichier `AMCtoOwncloud.sh` pour utiliser un autre terminal.
 
@@ -62,7 +66,7 @@ Vérifier que `gnome-terminal` est installé ou éditer le fichier `AMCtoOwnclou
     ADDRESS = 'https://ncloud.zaclys.com'
     USERNAME = 'NomUtilisateur'
     
-Le fichier `.csv` contenant les informations des étudiants doit utiliser des points-virgules `;` comme séparateurs ainsi que les en-têtres de colonnes suivants (il y a des paramètres optionnels dans la méthode `identify_students()` pour personnaliser ce comportement, voir [plus bas](https://github.com/remjg/AMCtoOwncloud/blob/master/README-FR.md#cas-particuliers-dutilisation)):
+Le fichier `.csv` contenant les informations des étudiants doit utiliser des points-virgules `;` comme séparateurs ainsi que les en-têtes de colonnes ci-dessous (il y a des paramètres optionnels dans la méthode `identify_students()` pour personnaliser ce comportement, voir [plus bas](https://github.com/remjg/AMCtoOwncloud/blob/master/README-FR.md#cas-particuliers-dutilisation)):
 
     group;surname;name;id;owncloud;email
     3emeE;MOUSE;Mickey;3998;cabitzmil;mickeymouse@domain.com
@@ -109,6 +113,6 @@ Plus d'options sont disponibles, vous pouvez trouver ci-dessous une liste compl�
 
 ## Générer des courriers d'informations
 
-Un document LaTeX est aussi présent dans le dossier `/information letters/` pour imprimer les liens partagés ainsi que le QC code correspondant pour chaque étudiant :
+Un document LaTeX est aussi présent dans le dossier `/information letters/` pour imprimer les liens partagés ainsi que le QR code correspondant pour chaque étudiant :
 
 <img src="/docs/InformationLetter.png" width="600x">
