@@ -98,7 +98,7 @@ class AMCtoOwncloud:
                                         'NAUTILUS_SCRIPT_SELECTED_FILE_PATHS']
             except:
                 print(f"ERROR: no files/folders provided"
-                      f" neither selected in Nautilus")
+                      f" neither selected in Nautilus\n{e}")
 
         # Keep files which are not sym link and parse folders
         for path in list_of_paths.splitlines():
