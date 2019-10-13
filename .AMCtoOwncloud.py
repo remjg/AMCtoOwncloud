@@ -487,10 +487,12 @@ class AMCtoOwncloud:
 
 CSV = '/path/to/csv/students.csv'
 FOLDER = 'Quizzes/'
+FOLDER_SUFFIX = ' - Maths'
 ADDRESS = 'https://ncloud.zaclys.com'
 USERNAME = 'MyUserName'
 
 amcsend = AMCtoOwncloud()
 amcsend.identify_students(csv_filepath=CSV)
 amcsend.connect_owncloud(address=ADDRESS, username=USERNAME, SSO=False)
-amcsend.upload_and_share(folder_root=FOLDER, replace_csv=False)
+amcsend.upload_and_share(folder_root=FOLDER, folder_name=FOLDER_SUFFIX, replace_csv=False,
+                         share_with_user=False, share_by_link=True, shorten_link=True)
