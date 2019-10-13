@@ -5,6 +5,7 @@
 Each quiz file is uploaded to a remote folder unique to each student. Then each folder is:
  * shared with the student who can be a local user or a remote user on another federated server
  * shared by link
+ * link is shortened using tinyurl.com
 
 Eventually, shared links are saved to a newly created `.csv` file (default behaviour) or to the current `.csv` file.
 
@@ -49,7 +50,12 @@ Copy `AMCtoOwncloud.sh` and `.AMCtoOwncloud.py` in the Nautilus scripts folder: 
 
 In order to make it work, you need to install the following Python modules:
 
-`requests`, `lxml.html`, `owncloud` (see [pyocclient](https://github.com/owncloud/pyocclient)).
+`requests`, `lxml.html`, `owncloud` (see [pyocclient](https://github.com/owncloud/pyocclient)), `pyshorteners` (see [pyshorteners](https://github.com/ellisonleao/pyshorteners/)).
+
+You can use the following commands:
+
+    pip3 install --user pyocclient
+    pip3 install --user pyshorteners
 
 You also need `gnome-terminal` or you will have to edit the `AMCtoOwncloud.sh` script file to use another terminal.
 
@@ -99,12 +105,14 @@ More options are available, see below for a full list of parameters with default
                               number_header="id",
                               email_header="email",
                               owncloud_header="owncloud",
-                              link_header="link")
+                              link_header="link"
+                              shortlink_header="shortlink")
     amcsend.connect_owncloud(address=ADDRESS, username=USERNAME, password=None, SSO=False)
     amcsend.upload_and_share(folder_root=FOLDER, folder_name=" - Maths Quizzes",
                                                  quiz_name=None,
                                                  share_with_user=True,
                                                  share_by_link=True,
+                                                 shorten_link=True,
                                                  replace_csv=False)
 
 ## Generating information letters
