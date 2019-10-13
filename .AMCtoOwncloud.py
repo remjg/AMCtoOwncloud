@@ -28,6 +28,8 @@ import math
 import datetime
 import shutil
 from pathlib import Path
+import pyshorteners
+from pyshorteners import Shortener
 
 ######### Implementation
 
@@ -43,7 +45,8 @@ class Student:
                  email="",
                  owncloud="",
                  quiz="",
-                 link=""):
+                 link="",
+                 shortlink=""):
         """Defines a Student and stores all the corresponding attributes
 
         - name
@@ -54,6 +57,7 @@ class Student:
         - owncloud username
         - quiz path
         - folder link
+        - shortened link
         """
         self.name = name
         self.surname = surname
@@ -73,6 +77,7 @@ class Student:
                f" {self.owncloud:10.10}"
                f" {self.quiz}"
                f" {self.link}"
+               f" {self.shortlink}"
                f" {self.email}")
 
 
@@ -136,6 +141,7 @@ class AMCtoOwncloud:
                                email_header="email",
                                owncloud_header="owncloud",
                                link_header="link",
+                               shortlink_header="shortlink",
                                debug=False):
         """Extract student information from a CSV file.
 
@@ -150,6 +156,7 @@ class AMCtoOwncloud:
         self._csvfile["csv_comment"] = csv_comment
         self._csvfile["number_header"] = number_header
         self._csvfile["link_header"] = link_header
+        self._csvfile["shortlink_header"] = shortlink_header
         # Create dictionary
         self._dict_of_students = {}
         with open(csv_filepath, newline="") as csv_file:
@@ -164,7 +171,8 @@ class AMCtoOwncloud:
                                       number=row[number_header],
                                       email=row.get(email_header, ""),
                                       owncloud=row.get(owncloud_header, ""),
-                                      link=row.get(link_header, ""))
+                                      link=row.get(link_header, ""),
+                                      shortlink=row.get(shortlink_header, ""))
                 except:
                     print(f"ERROR: Student without name or number in CSV file")
                 self._dict_of_students[student.number] = student
@@ -270,6 +278,7 @@ class AMCtoOwncloud:
                          quiz_name=None,
                          share_with_user=True,
                          share_by_link=True,
+                         shorten_link=True,
                          replace_csv=False):
         """Create remote folders, upload files, share with user and/or by link.
 
@@ -279,6 +288,7 @@ class AMCtoOwncloud:
         "User input - Surname Name (Number).ext"
         - Share folders with the corresponding students (if not already done)
         - Share folders by link
+        - Shorten link
         - Save links to .csv (if replace_csv=True)
         """
         if quiz_name is None:
@@ -374,6 +384,8 @@ class AMCtoOwncloud:
         csv_comment = self._csvfile["csv_comment"]
         number_header = self._csvfile["number_header"]
         link_header = self._csvfile["link_header"]
+        shortlink_header = self._csvfile["shortlink_header"]
+
         # New temporary .csv file path
         new_filename = (Path(csv_filepath).stem + "-" +
                         datetime.datetime.now().isoformat(timespec="minutes") +
@@ -388,20 +400,25 @@ class AMCtoOwncloud:
                                     quoting=csv.QUOTE_MINIMAL)
             # Remove empty fields in original file
             tab_in.fieldnames = [i for i in tab_in.fieldnames if i]
-            # If no "link" header, add it at the end
+            # Add "link" header and "shortlink" header at the end (if not there)
             fieldnames = tab_in.fieldnames.copy()
             if link_header not in fieldnames:
                 fieldnames.append(link_header)
+            if shortlink_header not in fieldnames:
+                fieldnames.append(shortlink_header)
             tab_out = csv.DictWriter(csv_out, fieldnames=fieldnames,
                                      delimiter=csv_delimiter,
                                      quoting=csv.QUOTE_MINIMAL)
             tab_out.writeheader()
-            # Write file with link value if not present or different
+            # Write file with link and shortlink if not present or different
             # TODO: comment line starting with a '#' are lost in the process
             for row in tab_in:
                 link = self._dict_of_students[row[number_header]].link
+                shortlink = self._dict_of_students[row[number_header]].shortlink
                 if row.get(link_header) != link:
                     row[link_header] = link
+                if row.get(shortlink_header) != shortlink:
+                    row[shortlink_header] = shortlink
                 # Hack... If 2 or more unamed fields (stored in key None):
                 # temporarily create fieldnames to save them separately
                 # (and avoid quoting)
