@@ -367,13 +367,33 @@ class AMCtoOwncloud:
                     print(f"ERROR: Folder {folder_student} couldn't be"
                           f' shared with user "{student.owncloud}"\n{e}')
 
-            # Share folders by link if necessary
-            if share_by_link:
-                share_obj = self._cloud_client.share_file_with_link(
+            # Share folder by link if necessary
+            if (share_by_link):
+                link_tmp = ""
+                for file_share in self._cloud_client.get_shares(folder_student):
+                    if (file_share.get_link() is not None):
+                        link = file_share.get_link()
+                        # no link yet ? Let's take an existing one
+                        if student.link == "":
+                            student.link = link
+                            break
+                        # existing link same as in csv, nothing to do
+                        elif student.link == link:
+                            break
+                        # another link as in csv, let's keep it in case
+                        else:
+                            link_tmp = link
+                # csv link not found ? Let's take an existing one if not empty
+                else:
+                    student.link = link_tmp
+                # share by link if empty string
+                if (not student.link):
+                    share_obj = self._cloud_client.share_file_with_link(
                                                                 folder_student)
-                student.link = share_obj.get_link()
+                    student.link = share_obj.get_link()
                 print(f"{display_counter} Folder"
                       f' shared by link "{student.link}"')
+
         if share_by_link:
             self._write_links_to_csv(replace_csv=replace_csv)
 
