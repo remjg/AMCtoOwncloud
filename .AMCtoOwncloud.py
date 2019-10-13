@@ -394,6 +394,21 @@ class AMCtoOwncloud:
                 print(f"{display_counter} Folder"
                       f' shared by link "{student.link}"')
 
+            # Shorten shared link if necessary and if it exists (max 5 tries)
+            if (shorten_link) and (student.link):
+                shortener = Shortener('Tinyurl')
+                for attempt in range(5):
+                    try:                  
+                        student.shortlink = shortener.short(student.link)
+                    except:
+                        pass
+                    else:
+                        print(f"{display_counter} Shared link"
+                              f' shortened as "{student.shortlink}"')
+                        break
+                else:
+                    print(f"ERROR: Link couldn't be shortened")
+
         if share_by_link:
             self._write_links_to_csv(replace_csv=replace_csv)
 
