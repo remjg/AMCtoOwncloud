@@ -286,7 +286,7 @@ class AMCtoOwncloud:
 
         # For display
         students_total = len(self._matched_students)
-        nb_digits = math.floor(math.log10(students_total))
+        nb_digits = math.floor(math.log10(students_total)+1)
         students_current = 0
         print('\nUploading files...')
 
@@ -299,7 +299,7 @@ class AMCtoOwncloud:
 
         for student in self._matched_students:
             students_current += 1
-            display_counter = (f"{students_current:{nb_digits}d}/"
+            display_counter = (f"{students_current:0>{nb_digits}d}/"
                                f"{students_total}")
 
             # Create remote folder if necessary
