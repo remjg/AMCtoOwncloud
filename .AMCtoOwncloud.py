@@ -311,6 +311,8 @@ class AMCtoOwncloud:
             students_current += 1
             display_counter = (f"{students_current:0>{nb_digits}d}/"
                                f"{students_total}")
+            print(f'{display_counter} Student {student.number}'
+                  f' - {student.surname} {student.name}')
 
             # Create remote folder if necessary
             folder_group = folder_root + student.group + "/"
