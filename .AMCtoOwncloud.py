@@ -197,9 +197,8 @@ class AMCtoOwncloud:
             # extract the first number in the file name
             quiz_name = os.path.basename(quiz_path)
             match = re.search(regular_expression, quiz_name)
-            if match:
-                student_number = match.group()
             try:
+                student_number = match.group()                
                 # update the quiz attribute with file path
                 self._dict_of_students[student_number].quiz = quiz_path
                 self._matched_students.append(
