@@ -397,10 +397,10 @@ class AMCtoOwncloud:
 
             # Shorten shared link if necessary and if it exists (max 5 tries)
             if (shorten_link) and (student.link):
-                shortener = Shortener('Tinyurl')
+                s = pyshorteners.Shortener()
                 for attempt in range(5):
                     try:                  
-                        student.shortlink = shortener.short(student.link)
+                        student.shortlink = s.tinyurl.short(student.link)
                     except:
                         pass
                     else:
